@@ -16,32 +16,52 @@
       }
 
       div {
-        /* position: absolute; */
+        position: absolute;
       }
     </style>
     <script type="text/javascript">
-      $(function() {
-          $("div").each(function(index) {
-            let width = Math.round(Math.random()*1000)
-            let height = Math.round(Math.random()*1000)
-            let x = Math.round(Math.random()*1000)
-            let y = Math.round(Math.random()*1000)
+    $(function() {
+    $("div").each(function(index) {
+    let width = Math.round(Math.random() * 1000)
+    let height = Math.round(Math.random() * 1000)
+    let x = Math.round(Math.random() * 1000)
+    let y = Math.round(Math.random() * 1000)
 
-            let r = Math.floor(Math.random() * 255) + 1
-            let g = Math.floor(Math.random() * 255) + 1
-            let b = Math.floor(Math.random() * 255) + 1
-            let color = [r, g, b].join()
+    let r = Math.floor(Math.random() *255) + 1
+    let g = Math.floor(Math.random() *255) + 1
+    let b = Math.floor(Math.random() *255) + 1
+    let color = [r, g, b].join()
 
-            console.log(color)
+    $(this).css({
+    "top": y + "px",
+    "left": x + "px",
+    "width": width + "px",
+    "height": height + "px",
+    "background-color": "rgb(" + color +")"
+    })
 
-            $(this).css({
-              "width": width + "px",
-              "height": height + "px",
-              "background-color": "rgb(" + color + ")"
-            })
-          })
-      })
-    </script>
+    $(this).on("mouseenter", function() {
+    let width = Math.round(Math.random() * 1000)
+    let height = Math.round(Math.random() * 1000)
+    let x = Math.round(Math.random() * 1000)
+    let y = Math.round(Math.random() * 1000)
+
+    let r = Math.floor(Math.random() *255) + 1
+    let g = Math.floor(Math.random() *255) + 1
+    let b = Math.floor(Math.random() *255) + 1
+    let color = [r, g, b].join()
+
+    $(this).css({
+    "top": y + "px",
+    "left": x + "px",
+    "width": width + "px",
+    "height": height + "px",
+    "background-color": "rgb(" + color +")"
+    })
+    })
+    })
+    })
+  </script>
   </head>
   <body>
     <div></div>
