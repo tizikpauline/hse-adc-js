@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="jquery.js" charset="utf-8"></script>
+    <style>
+      #test {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        transition: all 0.5s ease;
+      }
+
+      .blue {
+        background-color: blue !important;
+        transition: all 0.5s ease;
+        transform: scale(2) rotate(20deg) translateX(100px) translateY(20px) skewX(30deg) skewY(180deg);
+      }
+    </style>
+    <script type="text/javascript">
+      $(function() {
+        let testElement = document.getElementById("test")
+        $(testElement).addClass("blue")
+
+        $(testElement).click(function() {
+          $(testElement).toggleClass("blue")
+        })
+
+        console.log("After", testElement)
+      })
+    </script>
+  </head>
+  <body>
+    <div id="test">
+
+    </div>
+  </body>
+</html>
