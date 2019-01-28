@@ -15,6 +15,24 @@
         margin: 0;
       }
 
+      body {
+        display: flex;
+      }
+
+      section {
+        position: relative;
+        width: 50vh;
+        height: 80vh;
+        margin: auto;
+        background: white;
+        box-shadow: 0px 5px 30px 0px rgba(0,0,0,0.80);
+      }
+
+      div {
+        position: absolute;
+        will-change: transform;
+      }
+
       div {
         position: absolute;
       }
@@ -27,11 +45,14 @@
         let step
 
         for(step = 0; step < quantity; step++) {
-        elements += element
+          elements += element
       }
 
-      $("body").append(elements)
+      $("#artwork").append(elements)
       }
+
+      function getRandomArbitrary(min, max) {
+        return Math.floor(Math.random() * (max-min)) + min      }
 
       function generatePercent(limit) {
         let number = Math.round(Math.random() * limit)
@@ -49,17 +70,24 @@
       }
 
       function generateColorChannel() {
-        return Math.floor(Math.random() * 255)
+        // return Math.floor(Math.random() * 255)
+        return getRandomArbitrary(100, 256)
       }
 
       function generateColor() {
-        let r = generateColorChannel()
-        let g = generateColorChannel()
-        let b = generateColorChannel()
+        const r = generateColorChannel()
+        const g = generateColorChannel()
+        const b = generateColorChannel()
 
-        let color = "rgb(" + [r, g, b].join() + ")"
+        let colorArray = [r, g, b]
 
-        return color
+        const random = Math.floor(Math.random() * colorArray.length)
+
+        const colorCSS = "rgb(" + [r, g, b].join() + ")"
+
+        colorArray[random] = 0
+
+        return colorCSS
       }
 
       function changeRectangleCSS(element) {
@@ -77,130 +105,31 @@
           // "left": generateShift(width) + "%",
           "width": width + "%",
           "height": height + "%",
-          "background-color": generateColor()
+          "background-color": generateColor(),
         })
       }
 
       function changeRectanglesCSS() {
-        $("div").each(function(index) {
-          const element = $(this)
-          changeRectangleCSS(element)
+        $("div").each(function() {
+          changeRectangleCSS($(this))
         })
       }
 
       function changeRectangleOnTime() {
         setTimeout(function() {
-        changeRectanglesCSS()
-        changeRectangleOnTime()
-        }, 1000)
+          changeRectanglesCSS()
+          changeRectangleOnTime()
+        }, 600)
       }
 
       $(function() {
-        generateRectangles(10)
+        generateRectangles(100)
         changeRectangleOnTime()
       })
     </script>
   </head>
   <body>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <section id="artwork">
+    </section>
   </body>
 </html>
