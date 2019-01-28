@@ -20,46 +20,84 @@
       }
     </style>
     <script type="text/javascript">
-      $(function() {
-        $("div").each(function(index) {
-          let width = Math.round(Math.random() * 1000)
-          let height = Math.round(Math.random() * 1000)
-          let x = Math.round(Math.random() * 1000)
-          let y = Math.round(Math.random() * 1000)
+      function generateRectangles(quantity) {
+        const element = "<div></div>"
+        let elements = ""
 
-          let r = Math.floor(Math.random() *255) + 1
-          let g = Math.floor(Math.random() *255) + 1
-          let b = Math.floor(Math.random() *255) + 1
-          let color = [r, g, b].join()
+        let step
 
-          $(this).css({
-            "top": y + "px",
-            "left": x + "px",
-            "width": width + "px",
-            "height": height + "px",
-            "background-color": "rgb(" + color +")"
-          })
+        for(step = 0; step < quantity; step++) {
+        elements += element
+      }
 
-          $(this).on("mouseenter", function() {
-            let width = Math.round(Math.random() * 1000)
-            let height = Math.round(Math.random() * 1000)
-            let x = Math.round(Math.random() * 1000)
-            let y = Math.round(Math.random() * 1000)
+      $("body").append(elements)
+      }
 
-            let r = Math.floor(Math.random() *255) + 1
-            let g = Math.floor(Math.random() *255) + 1
-            let b = Math.floor(Math.random() *255) + 1
-            let color = [r, g, b].join()
+      function generatePercent(limit) {
+        let number = Math.round(Math.random() * limit)
+        let percent = "%"
+        return number
+      }
 
-            $(this).css({
-              "top": y + "px",
-              "left": x + "px",
-              "width": width + "px",
-              "height": height + "px",
-              "background-color": "rgb(" + color +")"
-            })
-          })
+      function generateSize() {
+        return generatePercent(95)
+      }
+
+      function generateShift(size) {
+        let limit = 100 - size
+        return generatePercent(limit)
+      }
+
+      function generateColorChannel() {
+        return Math.floor(Math.random() * 255)
+      }
+
+      function generateColor() {
+        let r = generateColorChannel()
+        let g = generateColorChannel()
+        let b = generateColorChannel()
+
+        let color = "rgb(" + [r, g, b].join() + ")"
+
+        return color
+      }
+
+      function changeRectangleCSS(element) {
+
+        const width = generateSize()
+        const height = generateSize()
+        const x = generateShift(width) + "%"
+        const y = generateShift(height) + "%"
+        const translate = [x,y].join()
+
+        element.css({
+          "transform": "translate(" + translate + ")translateZ(0)",
+
+          // "top": generateShift(height) + "%",
+          // "left": generateShift(width) + "%",
+          "width": width + "%",
+          "height": height + "%",
+          "background-color": generateColor()
         })
+      }
+
+      function changeRectanglesCSS() {
+        $("div").each(function(index) {
+          const element = $(this)
+          changeRectangleCSS(element)
+        })
+      }
+
+      function changeRectangleOnTime() {
+        setTimeout(function() {
+        changeRectanglesCSS()
+        changeRectangleOnTime()
+        }, 1000)
+      }
+
+      $(function() {
+        generateRectangles(10)
+        changeRectangleOnTime()
       })
     </script>
   </head>
